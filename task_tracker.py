@@ -1,13 +1,13 @@
 tasks = []
 
-def add_task(task):
-    tasks.append({"task": task, "done": False})
-    print(f"Task '{task}' added.")
+def add_task(task, priority="Low"):
+    tasks.append({"task": task, "priority": priority, "done": False})
+    print(f"Task '{task}' with priority '{priority}' added.")
 
 def view_tasks():
     for i, t in enumerate(tasks, start=1):
         status = "Done" if t["done"] else "Pending"
-        print(f"{i}. {t['task']} - {status}")
+        print(f"{i}. {t['task']} - Priority: {t['priority']} - {status}")
 
 def mark_done(index):
     if 0 < index <= len(tasks):
@@ -23,7 +23,8 @@ if __name__ == "__main__":
         choice = int(input("Choose an option: "))
         if choice == 1:
             task = input("Enter the task: ")
-            add_task(task)
+            priority = input("Enter the priority (High/Medium/Low): ")
+            add_task(task, priority)
         elif choice == 2:
             view_tasks()
         elif choice == 3:
