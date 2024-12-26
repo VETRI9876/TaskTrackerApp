@@ -1,13 +1,14 @@
 tasks = []
 
-def add_task(task, priority="Low"):
-    tasks.append({"task": task, "priority": priority, "done": False})
-    print(f"Task '{task}' with priority '{priority}' added.")
+def add_task(task, due_date=None):
+    tasks.append({"task": task, "due_date": due_date, "done": False})
+    print(f"Task '{task}' with due date '{due_date}' added.")
 
 def view_tasks():
     for i, t in enumerate(tasks, start=1):
         status = "Done" if t["done"] else "Pending"
-        print(f"{i}. {t['task']} - Priority: {t['priority']} - {status}")
+        due_date = t["due_date"] if t["due_date"] else "No due date"
+        print(f"{i}. {t['task']} - Due: {due_date} - Status: {status}")
 
 def mark_done(index):
     if 0 < index <= len(tasks):
@@ -22,8 +23,9 @@ if __name__ == "__main__":
         choice = int(input("Choose an option: "))
         if choice == 1:
             task = input("Enter the task: ")
-            priority = input("Enter the priority (High/Medium/Low): ").capitalize()
-            add_task(task, priority)
+            due_date = input("Enter the due date (YYYY-MM-DD) or leave blank: ")
+            due_date = due_date if due_date else None
+            add_task(task, due_date)
         elif choice == 2:
             view_tasks()
         elif choice == 3:
